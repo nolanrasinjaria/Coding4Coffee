@@ -5,6 +5,8 @@ VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coding4Coffee.Basics", "Coding4Coffee.Basics\Coding4Coffee.Basics.csproj", "{098AF52C-1D9F-4E3B-8CB4-3335B528AE15}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coding4Coffee.WinForms", "Coding4Coffee.WinForms\Coding4Coffee.WinForms.csproj", "{18853EDC-F909-458D-971B-45EBCAB866EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{098AF52C-1D9F-4E3B-8CB4-3335B528AE15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{098AF52C-1D9F-4E3B-8CB4-3335B528AE15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{098AF52C-1D9F-4E3B-8CB4-3335B528AE15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18853EDC-F909-458D-971B-45EBCAB866EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18853EDC-F909-458D-971B-45EBCAB866EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18853EDC-F909-458D-971B-45EBCAB866EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18853EDC-F909-458D-971B-45EBCAB866EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
