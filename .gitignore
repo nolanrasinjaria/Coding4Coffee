@@ -22,3 +22,6 @@
 *.db-shm
 /.vs
 /Coding4Coffee.Basics/bin
+/Coding4Coffee.WinForms/bin
+/Coding4Coffee.WinForms/obj
+*.user
