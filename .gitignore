@@ -1,0 +1,23 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Coding4Coffee.Basics/obj
+/.vs/Coding4Coffee/DesignTimeBuild
+/.vs/Coding4Coffee/FileContentIndex
+*.json
+*.v2
+/.vs/Coding4Coffee/v17/.suo
+/.vs/Coding4Coffee/v17/DocumentLayout.json
+/.vs/ProjectEvaluation
+/.vs/Coding4Coffee/CopilotIndices/17.13.444.19527/SemanticSymbols.db-wal
+/.vs/Coding4Coffee/CopilotIndices/17.13.444.19527/SemanticSymbols.db-shm
+/.vs/Coding4Coffee/CopilotIndices/17.13.444.19527/SemanticSymbols.db
+/.vs/Coding4Coffee/CopilotIndices/17.13.444.19527/CodeChunks.db-shm
+/.vs/Coding4Coffee/CopilotIndices/17.13.444.19527/CodeChunks.db-wal
+/.vs/Coding4Coffee/CopilotIndices/17.13.444.19527/CodeChunks.db
+*.db
+*.db
+*.db
+*.db-shm
+/.vs
