@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using Coding4Coffee.Basics.Localization;
 
 namespace Coding4Coffee.WinForms.Localization.Controls
