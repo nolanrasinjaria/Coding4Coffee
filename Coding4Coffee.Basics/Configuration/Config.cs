@@ -45,7 +45,7 @@ namespace Coding4Coffee.Basics.Configuration
         /// <summary>
         /// Indicates whether the configuration has a value.
         /// </summary>
-        public bool HasValue => !string.IsNullOrWhiteSpace(Value);
+        public bool HasValue => !string.IsNullOrWhiteSpace(Value) && !Value.Equals($"[{Key}]");
 
         /// <summary>
         /// The value of the configuration as an integer.
