@@ -7,10 +7,12 @@
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageTags>configuration;localization;commands;winforms</PackageTags>
+    <AssemblyVersion></AssemblyVersion>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Coding4Coffee.Basics" Version="1.0.0" />
+    <PackageReference Include="Coding4Coffee.Basics" Version="1.0.1" />
   </ItemGroup>
 
 </Project>
