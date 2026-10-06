@@ -1,5 +1,4 @@
-[README.md](https://github.com/user-attachments/files/33103175/README.md)
-# Coding4Coffee
+[README.md](https://github.com/user-attachments/files/33103760/README.md)[Uploading README.m# Coding4Coffee
 
 A comprehensive .NET 10 suite of libraries for building modern, localizable Windows Forms applications with strong MVVM support, configuration management, and command-based UI controls.
 
@@ -18,7 +17,7 @@ dotnet add package Coding4Coffee.Basics
 
 ### [Coding4Coffee.WinForms](./Coding4Coffee.WinForms)
 A modern Windows Forms library extending standard controls with:
-- **Localizable Controls**: 50+ built-in localizable WinForms controls (Forms, Buttons, TextBoxes, DataGridViews, MenuStrips, ToolStrips, etc.)
+- **Localizable Controls**: 45 localizable WinForms controls (Forms, Buttons, TextBoxes, DataGridViews, MenuStrips, ToolStrips, Dialogs, etc.)
 - **Command-Enabled Controls**: Bind `ICommand` implementations to standard WinForms controls
 - **Form Commands**: Reusable commands for managing modeless forms
 - **UI Configuration**: Specialized serialization for WinForms types (Colors, Fonts, Icons, Images)
@@ -219,3 +218,4 @@ This project is distributed under the **MIT License**.
 ---
 
 **Made with ☕ by the Coding4Coffee team**
+d…]()
