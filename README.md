@@ -1,4 +1,4 @@
-[README.md](https://github.com/user-attachments/files/33103760/README.md)[Uploading README.m# Coding4Coffee
+# Coding4Coffee
 
 A comprehensive .NET 10 suite of libraries for building modern, localizable Windows Forms applications with strong MVVM support, configuration management, and command-based UI controls.
 
@@ -80,7 +80,7 @@ public class MainForm : LocalizableForm
 ```csharp
 using Coding4Coffee.WinForms.Commands;
 
-// Bind an ICommand to any ButtonBase or ToolStripMenuItem
+// Bind an ICommand to Button or ToolStripMenuItem
 var saveButton = new Button();
 saveButton.BindCommand(saveCommand, commandParameter);
 
@@ -114,19 +114,19 @@ Coding4Coffee/
 ## ✨ Features
 
 ### Coding4Coffee.Basics
-- ✅ 50+ specialized config types with custom serialization
+- ✅ 7 specialized config types with custom serialization
 - ✅ Runtime culture switching with event notifications
 - ✅ Strongly-typed configuration with implicit casting
 - ✅ Optional JSON persistence via `SettingsBase`
-- ✅ Pre-built `ICommand` implementations
+- ✅ 4 pre-built `ICommand` implementations
 
 ### Coding4Coffee.WinForms
-- ✅ 50+ localizable WinForms controls
+- ✅ 45 localizable WinForms controls
 - ✅ Automatic localization on culture change
 - ✅ Command binding for ButtonBase and ToolStripMenuItem
-- ✅ Modeless form management via commands
+- ✅ 2 modeless form management commands
 - ✅ Custom serialization for Colors, Fonts, Icons, and Images
-- ✅ Specialized support for all standard control types
+- ✅ 18 command-enabled control types
 
 ## 📝 Usage Examples
 
@@ -218,4 +218,4 @@ This project is distributed under the **MIT License**.
 ---
 
 **Made with ☕ by the Coding4Coffee team**
-d…]()
+
