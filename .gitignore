@@ -2,26 +2,98 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/Coding4Coffee.Basics/obj
-/.vs/Coding4Coffee/DesignTimeBuild
-/.vs/Coding4Coffee/FileContentIndex
-*.json
-*.v2
-/.vs/Coding4Coffee/v17/.suo
-/.vs/Coding4Coffee/v17/DocumentLayout.json
-/.vs/ProjectEvaluation
-/.vs/Coding4Coffee/CopilotIndices/17.13.444.19527/SemanticSymbols.db-wal
-/.vs/Coding4Coffee/CopilotIndices/17.13.444.19527/SemanticSymbols.db-shm
-/.vs/Coding4Coffee/CopilotIndices/17.13.444.19527/SemanticSymbols.db
-/.vs/Coding4Coffee/CopilotIndices/17.13.444.19527/CodeChunks.db-shm
-/.vs/Coding4Coffee/CopilotIndices/17.13.444.19527/CodeChunks.db-wal
-/.vs/Coding4Coffee/CopilotIndices/17.13.444.19527/CodeChunks.db
-*.db
-*.db
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio cache/options directory
+.vs/
+/.vs/
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Rider IDE
+.idea/
+.idea_modules/
+*.iml
+*.iws
+*.ipr
+
+# ReSharper is a .NET coding add-in
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.VisualState.xml
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+*.sap
+
+# Test Results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# NuGet related
+*.nupkg
+*.snupkg
+*.nuspec
+project.lock.json
+project.assets.json
+*.nuget.props
+*.nuget.targets
+
+# Database files
 *.db
 *.db-shm
-/.vs
-/Coding4Coffee.Basics/bin
-/Coding4Coffee.WinForms/bin
-/Coding4Coffee.WinForms/obj
-*.user
+*.db-wal
+*.mdb
+*.sqlite
+
+# Backup files
+*.bak
+*.tmp
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+ehthumbs.db
+Thumbs.db
+
+# Build output
+out/
+dist/
+publish/
+/_site
+/api
+
+# Local environment files
+.env
+.env.local
+launchSettings.json
+
