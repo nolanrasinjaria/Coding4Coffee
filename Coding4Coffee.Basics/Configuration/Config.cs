@@ -1,159 +1,105 @@
-﻿using System.Configuration;
-using System.Drawing;
-using System.Globalization;
+using System.Text.Json;
 
 namespace Coding4Coffee.Basics.Configuration
 {
     /// <summary>
-    /// Represents a configuration setting.
+    /// Represents a typed configuration setting that can optionally be persisted via a <see cref="System.Configuration.SettingsBase"/>.
     /// </summary>
-    /// <param name="key">Key under which that setting as saved within a .settings file</param>
-    public class Config(string key)
+    /// <typeparam name="TValue">The type of the configuration value.</typeparam>
+    public class Config<TValue> : IConfig
     {
-        /// <summary>
-        /// The settings object that is used to save the configuration.
-        /// </summary>
-        public static SettingsBase? Settings { get; set; }
+        private TValue? _value;
+        private string? _settingsContent;
 
-        /// <summary>
-        /// Event that is raised when the value of the configuration changes.
-        /// </summary>
+        /// <summary>Raised when the value of the configuration changes.</summary>
         public event EventHandler? ValueChanged;
 
-        /// <summary>
-        /// The key under which the configuration is saved.
-        /// </summary>
-        public string Key { get; } = key;
+        /// <summary>Initializes a new instance of <see cref="Config{TValue}"/>.</summary>
+        public Config() {/* no op */}
 
-        /// <summary>
-        /// The value of the configuration.
-        /// </summary>
-        public string Value
+        /// <summary>Initializes a new instance of <see cref="Config{TValue}"/> with a key and optional persistence flag.</summary>
+        /// <param name="key">The key under which the config value is stored.</param>
+        /// <param name="isTransient">If <c>true</c>, the value is not persisted to the settings file.</param>
+        public Config(string key, bool isTransient = false) : this()
         {
-            get => Settings?[Key]?.ToString() ?? $"[{Key}]";
+            Key = key;
+            IsTransient = isTransient;
+        }
+
+        /// <summary>The key under which the configuration value is stored.</summary>
+        public string Key { get; set; } = string.Empty;
+
+        /// <summary>If <c>true</c>, the configuration value is not persisted to the settings file.</summary>
+        public bool IsTransient { get; set; }
+
+        private bool ValueEquals(TValue? other)
+        {
+            return _value == null ? other == null : _value.Equals(other);
+        }
+
+        /// <summary>Indicates whether the configuration has a non-null value.</summary>
+        public bool HasValue => Value != null;
+
+        /// <summary>Indicates whether the configuration value equals the default value for <typeparamref name="TValue"/>.</summary>
+        public bool HasDefaultValue => HasValue && ValueEquals(default);
+
+        /// <summary>Gets or sets the configuration value.</summary>
+        public virtual TValue? Value
+        {
+            get
+            {
+                if (!IsTransient && string.IsNullOrWhiteSpace(_settingsContent))
+                {
+                    try
+                    {
+                        _settingsContent = ConfigFactory.Settings?[Key]?.ToString();
+
+                        if (!string.IsNullOrWhiteSpace(_settingsContent))
+                        {
+                            _value = JsonSerializer.Deserialize<TValue>(_settingsContent);
+                        }
+                    }
+                    catch(JsonException)
+                    {
+                        // invalid JSON found in Settings file -> clean up
+                        _value = default;
+                        _settingsContent = null;
+
+                        if(ConfigFactory.Settings != null)
+                        {
+                            ConfigFactory.Settings[Key] = null;
+                            ConfigFactory.Settings.Save();
+                        }
+                    }
+                }
+
+                return _value;
+            }
+
             set
             {
-                if (Settings != null && value != Value)
+                if (!ValueEquals(value))
                 {
-                    Settings[Key] = value;
-                    Settings.Save();
+                    _value = value;
+
+                    if (!IsTransient)
+                    {
+                        _settingsContent = JsonSerializer.Serialize(_value);
+
+                        if (ConfigFactory.Settings != null)
+                        {
+                            ConfigFactory.Settings[Key] = _settingsContent;
+                            ConfigFactory.Settings.Save();
+                        }
+                    }
+
                     ValueChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
         }
 
-        /// <summary>
-        /// Indicates whether the configuration has a value.
-        /// </summary>
-        public bool HasValue => !string.IsNullOrWhiteSpace(Value) && !Value.Equals($"[{Key}]");
-
-        /// <summary>
-        /// The value of the configuration as an integer.
-        /// </summary>
-        public int IntValue
-        {
-            get => int.Parse(Value, CultureInfo.InvariantCulture);
-            set => Value = value.ToString(CultureInfo.InvariantCulture);
-        }
-
-        /// <summary>
-        /// The value of the configuration as an array of integers.
-        /// </summary>
-        public int[] IntArrayValue
-        {
-            get => [.. Value.Split(',').Select(s => int.Parse(s, CultureInfo.InvariantCulture))];
-            set => Value = Value = string.Join(',', value.Select(n => n.ToString(CultureInfo.InvariantCulture)));
-        }
-
-        /// <summary>
-        /// The value of the configuration as a double.
-        /// </summary>
-        public double DoubleValue
-        {
-            get => double.Parse(Value, CultureInfo.InvariantCulture);
-            set => Value = value.ToString(CultureInfo.InvariantCulture);
-        }
-
-        /// <summary>
-        /// The value of the configuration as a DateTime.
-        /// </summary>
-        public DateTime DateTimeValue
-        {
-            get => DateTime.Parse(Value, CultureInfo.InvariantCulture);
-            set => Value = value.ToString(CultureInfo.InvariantCulture);
-        }
-
-        /// <summary>
-        /// The value of the configuration as a TimeSpan.
-        /// </summary>
-        public TimeSpan TimeSpanValue
-        {
-            get => TimeSpan.Parse(Value, CultureInfo.InvariantCulture);
-            set => Value = value.ToString();
-        }
-
-        /// <summary>
-        /// The value of the configuration as a boolean.
-        /// </summary>
-        public bool BoolValue
-        {
-            get => bool.Parse(Value);
-            set => Value = value.ToString();
-        }
-
-        /// <summary>
-        /// The value of the configuration as a Color.
-        /// </summary>
-        public Color ColorValue
-        {
-            get => Color.FromArgb(IntValue);
-            set => IntValue = value.ToArgb();
-        }
-
-        /// <summary>
-        /// The value of the configuration as a Point.
-        /// </summary>
-        public Point PointValue
-        {
-            get
-            {
-                int[] numbers = IntArrayValue;
-                return new Point(numbers[0], numbers[1]);
-            }
-            set => IntArrayValue = [value.X, value.Y];
-        }
-
-        /// <summary>
-        /// The value of the configuration as a Size.
-        /// </summary>
-        public Size SizeValue
-        {
-            get
-            {
-                int[] numbers = IntArrayValue;
-                return new Size(numbers[0], numbers[1]);
-            }
-            set => IntArrayValue = [value.Width, value.Height];
-        }
-
-        /// <summary>
-        /// The value of the configuration as a CultureInfo.
-        /// </summary>
-        public CultureInfo CultureValue
-        {
-            get => CultureInfo.GetCultureInfo(Value);
-            set => Value = value.Name;
-        }
-
-        public static implicit operator string(Config config) => config.Value;
-        public static implicit operator int(Config config) => config.IntValue;
-        public static implicit operator double(Config config) => config.DoubleValue;
-        public static implicit operator DateTime(Config config) => config.DateTimeValue;
-        public static implicit operator TimeSpan(Config config) => config.TimeSpanValue;
-        public static implicit operator bool(Config config) => config.BoolValue;
-        public static implicit operator Color(Config config) => config.ColorValue;
-        public static implicit operator Point(Config config) => config.PointValue;
-        public static implicit operator Size(Config config) => config.SizeValue;
-        public static implicit operator CultureInfo(Config config) => config.CultureValue;
+        /// <summary>Implicitly converts a <see cref="Config{TValue}"/> instance to its value.</summary>
+        /// <param name="config">The config instance.</param>
+        public static implicit operator TValue? (Config<TValue> config) => config.Value;
     }
 }

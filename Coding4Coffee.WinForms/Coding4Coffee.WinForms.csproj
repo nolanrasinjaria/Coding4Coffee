@@ -1,18 +1,26 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0-windows</TargetFramework>
+	<TargetFramework>net10.0-windows</TargetFramework>
 	  <UseWindowsForms>true</UseWindowsForms>
 	  <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <PackageTags>configuration;localization;commands;winforms</PackageTags>
-    <AssemblyVersion></AssemblyVersion>
-    <Version>1.0.2</Version>
+	<Nullable>enable</Nullable>
+	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<PackageTags>configuration;localization;commands;winforms</PackageTags>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<LicenseExpression>MIT</LicenseExpression>
+	<AssemblyVersion></AssemblyVersion>
+	<Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Coding4Coffee.Basics" Version="1.0.1" />
+    <ProjectReference Include="..\Coding4Coffee.Basics\Coding4Coffee.Basics.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

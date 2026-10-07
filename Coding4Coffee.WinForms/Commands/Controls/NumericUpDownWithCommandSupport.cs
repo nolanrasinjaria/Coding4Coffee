@@ -1,39 +1,102 @@
-﻿using System.Windows.Input;
+using System;
 using System.ComponentModel;
+using System.Windows.Forms;
+using System.Windows.Input;
 
 namespace Coding4Coffee.WinForms.Commands.Controls
 {
+    /// <summary>
+    /// A custom NumericUpDown control that integrates command binding support.
+    /// Executes the bound command when the control's value changes.
+    /// </summary>
     public class NumericUpDownWithCommandSupport : NumericUpDown
     {
+        private ICommand? _command;
+        private object? _commandParameter;
 
-        private ICommand? command;
-
+        /// <summary>
+        /// Gets or sets the command to execute when the value changes.
+        /// </summary>
+        /// <remarks>
+        /// Executes the command whenever <see cref="NumericUpDown.ValueChanged"/> is raised.
+        /// Automatically synchronizes <see cref="Control.Enabled"/> based on <see cref="ICommand.CanExecute(object?)"/>,
+        /// passing <see cref="CommandParameter"/> (or <see cref="NumericUpDown.Value"/> if <see cref="CommandParameter"/> is <see langword="null"/>).
+        /// </remarks>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ICommand? Command
         {
-            get => command;
+            get => _command;
             set
             {
-                if (command != null)
+                if (_command != null)
                 {
-                    command.CanExecuteChanged -= Command_CanExecuteChanged;
+                    _command.CanExecuteChanged -= Command_CanExecuteChanged;
                     ValueChanged -= NumericUpDown_ValueChanged;
                 }
 
-                command = value;
+                _command = value;
 
-                if (command != null)
+                if (_command != null)
                 {
-                    command.CanExecuteChanged += Command_CanExecuteChanged;
+                    _command.CanExecuteChanged += Command_CanExecuteChanged;
                     ValueChanged += NumericUpDown_ValueChanged;
 
-                    Enabled = command.CanExecute(null);
+                    Enabled = _command.CanExecute(CommandParameter ?? Value);
                 }   
             }
         }
 
-        private void Command_CanExecuteChanged(object? sender, EventArgs e) => Enabled = command?.CanExecute(null) ?? true;
+        /// <summary>
+        /// Gets or sets an optional command parameter. If null, Value is passed.
+        /// </summary>
+        /// <remarks>
+        /// If this property is <see langword="null"/>, the control passes its current <see cref="NumericUpDown.Value"/>
+        /// (<see cref="decimal"/>) as the command parameter.
+        /// </remarks>
+        [Browsable(true)]
+        [Category("Data")]
+        [Description("The parameter to pass to the command on ValueChanged event. If not set, Value is used.")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public object? CommandParameter
+        {
+            get => _commandParameter;
+            set
+            {
+                _commandParameter = value;
+                if (_command != null)
+                {
+                    Enabled = _command.CanExecute(_commandParameter ?? Value);
+                }
+            }
+        }
 
-        private void NumericUpDown_ValueChanged(object? sender, EventArgs e) => command?.Execute(Value);
+        private void Command_CanExecuteChanged(object? sender, EventArgs e) 
+            => Enabled = _command?.CanExecute(CommandParameter ?? Value) ?? true;
+
+        private void NumericUpDown_ValueChanged(object? sender, EventArgs e)
+        {
+            if (_command != null)
+            {
+                var parameter = CommandParameter ?? Value;
+                if (_command.CanExecute(parameter))
+                {
+                    _command.Execute(parameter);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Binds a command and optional parameter to the control.
+        /// </summary>
+        /// <param name="command">The command to assign.</param>
+        /// <param name="parameter">The parameter value for the command.</param>
+        /// <returns>The current <see cref="NumericUpDownWithCommandSupport"/> instance to support fluent method chaining.</returns>
+        public NumericUpDownWithCommandSupport BindCommand(ICommand command, object? parameter = null)
+        {
+            CommandParameter = parameter;
+            Command = command;
+
+            return this;
+        }
     }
 }

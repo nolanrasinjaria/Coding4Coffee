@@ -124,9 +124,9 @@ Coding4Coffee/
 - ✅ 45 localizable WinForms controls
 - ✅ Automatic localization on culture change
 - ✅ Command binding for ButtonBase and ToolStripMenuItem
-- ✅ 2 modeless form management commands
+- ✅ 3 form & control management commands
 - ✅ Custom serialization for Colors, Fonts, Icons, and Images
-- ✅ 18 command-enabled control types
+- ✅ 21 command-enabled control types with intelligent parameter fallback and debounce support
 
 ## 📝 Usage Examples
 

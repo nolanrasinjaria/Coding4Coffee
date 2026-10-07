@@ -1,12 +1,16 @@
-﻿using Coding4Coffee.Basics.Localization;
+using Coding4Coffee.Basics.Localization;
+using Coding4Coffee.WinForms.Localization;
 
 namespace Coding4Coffee.WinForms.Localization.Controls
 {
+    /// <summary>
+    /// A MenuStrip control that supports dynamic localization of its menu items at runtime.
+    /// </summary>
     public class LocalizableMenuStrip : MenuStrip, ILocalizable
     {
-        public void Localize()
-        {
-            Items.LocalizeCollection();
-        }
+        /// <summary>
+        /// Localizes all menu items contained within the MenuStrip.
+        /// </summary>
+        public void Localize() => Items.LocalizeCollection();
     }
 }

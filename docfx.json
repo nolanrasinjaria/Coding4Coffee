@@ -1,0 +1,38 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": [
+            "Coding4Coffee.Basics/Coding4Coffee.Basics.csproj",
+            "Coding4Coffee.WinForms/Coding4Coffee.WinForms.csproj"
+          ]
+        }
+      ],
+      "dest": "api"
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [
+          "api/**.yml",
+          "api/index.md"
+        ]
+      },
+      {
+        "files": [
+          "index.md"
+        ]
+      }
+    ],
+    "output": "_site",
+    "template": [
+      "default",
+      "modern"
+    ]
+  },
+  "serve": {
+    "port": 4711
+  }
+}
