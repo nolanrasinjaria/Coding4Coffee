@@ -17,7 +17,7 @@ namespace Coding4Coffee.WinForms.Commands.Controls
         /// Gets or sets the command to execute when the combo box selection changes.
         /// </summary>
         /// <remarks>
-        /// Overrides the inherited <see cref="ToolStripItem.Command"/> property to add command execution and state synchronization.
+        /// Shadows the inherited <see cref="ToolStripItem.Command"/> property intentionally.
         /// The command is invoked in response to <see cref="ComboBox.SelectionChangeCommitted"/>,
         /// meaning it executes only when the user changes the selection in the UI, not when
         /// <see cref="ComboBox.SelectedIndex"/> or <see cref="ComboBox.SelectedItem"/> is changed programmatically.
@@ -52,7 +52,7 @@ namespace Coding4Coffee.WinForms.Commands.Controls
         /// Gets or sets an optional command parameter. If null, SelectedItem is passed.
         /// </summary>
         /// <remarks>
-        /// Overrides the inherited <see cref="ToolStripItem.CommandParameter"/> property to add intelligent default parameter handling.
+        /// Shadows the inherited <see cref="ToolStripItem.CommandParameter"/> property intentionally.
         /// If this property is <see langword="null"/>, the control passes its current <see cref="ComboBox.SelectedItem"/>
         /// as the command parameter.
         /// </remarks>

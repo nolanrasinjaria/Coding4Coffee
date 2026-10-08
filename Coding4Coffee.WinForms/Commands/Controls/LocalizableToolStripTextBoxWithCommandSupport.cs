@@ -49,7 +49,7 @@ namespace Coding4Coffee.WinForms.Commands.Controls
         /// Gets or sets the command to execute when the text box text changes.
         /// </summary>
         /// <remarks>
-        /// Overrides the inherited <see cref="ToolStripItem.Command"/> property to add command execution with debouncing.
+        /// Shadows the inherited <see cref="ToolStripItem.Command"/> property intentionally.
         /// Unlike immediate action controls, text entry is debounced using an internal timer set to
         /// <see cref="DebounceInterval"/> ms. Each keystroke restarts the timer. The command executes
         /// only after typing ceases for the interval duration.
@@ -85,7 +85,7 @@ namespace Coding4Coffee.WinForms.Commands.Controls
         /// Gets or sets an optional command parameter. If null, Text is passed.
         /// </summary>
         /// <remarks>
-        /// Overrides the inherited <see cref="ToolStripItem.CommandParameter"/> property to add intelligent default parameter handling.
+        /// Shadows the inherited <see cref="ToolStripItem.CommandParameter"/> property intentionally.
         /// If this property is <see langword="null"/>, the current <see cref="TextBox.Text"/> string
         /// is passed as the command parameter.
         /// </remarks>

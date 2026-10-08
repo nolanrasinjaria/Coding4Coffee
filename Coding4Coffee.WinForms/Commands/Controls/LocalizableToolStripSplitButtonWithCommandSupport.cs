@@ -17,7 +17,7 @@ namespace Coding4Coffee.WinForms.Commands.Controls
         /// Gets or sets the command to execute when the button portion is clicked.
         /// </summary>
         /// <remarks>
-        /// Overrides the inherited <see cref="ToolStripItem.Command"/> property to add command execution and state synchronization.
+        /// Shadows the inherited <see cref="ToolStripItem.Command"/> property intentionally.
         /// Executes the command whenever the button is clicked (not the dropdown arrow).
         /// Uses <see cref="ToolStripSplitButton.ButtonClick"/> instead of the default Click event.
         /// Automatically synchronizes <see cref="ToolStripItem.Enabled"/> based on <see cref="ICommand.CanExecute(object?)"/>,
@@ -51,7 +51,7 @@ namespace Coding4Coffee.WinForms.Commands.Controls
         /// Gets or sets an optional command parameter.
         /// </summary>
         /// <remarks>
-        /// Overrides the inherited <see cref="ToolStripItem.CommandParameter"/> property to add intelligent parameter handling.
+        /// Shadows the inherited <see cref="ToolStripItem.CommandParameter"/> property intentionally.
         /// If this property is <see langword="null"/>, <see langword="null"/> is passed as the command parameter.
         /// </remarks>
         [Browsable(true)]
